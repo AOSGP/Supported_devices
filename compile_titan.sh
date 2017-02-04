@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ~/cm14.1/
+cd ~/aosgp/
 make clobber
-cd ~/cm14.1/
+cd ~/aosgp/
 source build/envsetup.sh && time brunch titan
