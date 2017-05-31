@@ -1,8 +1,11 @@
 #!/bin/bash
+export USE_CCACHE=1
+~/aosgp/prebuilts/sdk/tools/jack-admin stop-server
+~/aosgp/prebuilts/sdk/tools/jack-admin kill-server
+~/aosgp/prebuilts/sdk/tools/jack-admin uninstall-server
 cd ~/aosgp/
 make clobber
-cd ~/aosgp/
-source build/envsetup.sh && time brunch tomato
+source build/envsetup.sh && breakfast tomato && time mka -j32 bacon
 cd /var/lib/jenkins/aosgp/out/target/product/tomato/
-mv lineage-aosgp-X-2.1.1-$(date +%Y%m%d)-tomato.zip aosgp-X-2.1.1-$(date +%Y%m%d)-tomato.zip
-mv aosgp-X-2.1.1-$(date +%Y%m%d)-tomato.zip /var/www/html/downloads/AOSGP/Yu/Yureka-tomato//aosgp-X-2.1.1-$(date +%Y%m%d)-tomato.zip
+rename 's/lineage-aosgp/aosgp/' lineage-aosgp-X-2.1.1*.zip
+mv aosgp-X-2.1.1-*.zip /var/www/html/downloads/AOSGP/Yu/Yureka-tomato/

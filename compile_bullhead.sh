@@ -1,8 +1,12 @@
 #!/bin/bash
+#export USE_CCACHE=1
+unset USE_CCACHE
+~/aosgp/prebuilts/sdk/tools/jack-admin stop-server
+~/aosgp/prebuilts/sdk/tools/jack-admin kill-server
+~/aosgp/prebuilts/sdk/tools/jack-admin uninstall-server
 cd ~/aosgp/
 make clobber
-cd ~/aosgp/
-source build/envsetup.sh && time brunch bullhead
+source build/envsetup.sh && breakfast bullhead && time make -j32 bacon
 cd /var/lib/jenkins/aosgp/out/target/product/bullhead/
-mv lineage-aosgp-X-2.1.1-$(date +%Y%m%d)-bullhead.zip aosgp-X-2.1.1-$(date +%Y%m%d)-bullhead.zip
-mv aosgp-X-2.1.1-$(date +%Y%m%d)-bullhead.zip /var/www/html/downloads/AOSGP/LG/Nexus5x-bullhead/aosgp-X-2.1.1-$(date +%Y%m%d)-bullhead.zip
+rename 's/lineage-aosgp/aosgp/' lineage-aosgp-X-2.1.1*.zip
+mv aosgp-X-2.1.1-*.zip /var/www/html/downloads/AOSGP/LG/Nexus5x-bullhead/

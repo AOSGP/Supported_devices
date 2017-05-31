@@ -1,8 +1,11 @@
 #!/bin/bash
+export USE_CCACHE=1
+~/aosgp/prebuilts/sdk/tools/jack-admin stop-server
+~/aosgp/prebuilts/sdk/tools/jack-admin kill-server
+~/aosgp/prebuilts/sdk/tools/jack-admin uninstall-server
 cd ~/aosgp/
 make clobber
-cd ~/aosgp/
-source build/envsetup.sh && time brunch paella
+source build/envsetup.sh && breakfast paella && time make -j32 bacon
 cd /var/lib/jenkins/aosgp/out/target/product/paella/
-mv lineage-aosgp-X-2.1.1-$(date +%Y%m%d)-paella.zip aosgp-X-2.1.1-$(date +%Y%m%d)-paella.zip
-mv aosgp-X-2.1.1-$(date +%Y%m%d)-paella.zip /var/www/html/downloads/AOSGP/Bq/BqAquarisX5-paella/aosgp-X-2.1.1-$(date +%Y%m%d)-paella.zip
+rename 's/lineage-aosgp/aosgp/' lineage-aosgp-X-2.1.1*.zip
+mv aosgp-X-2.1.1-*.zip /var/www/html/downloads/AOSGP/Bq/BqAquarisX5-paella/

@@ -1,8 +1,11 @@
 #!/bin/bash
+export USE_CCACHE=1
+~/aosgp/prebuilts/sdk/tools/jack-admin stop-server
+~/aosgp/prebuilts/sdk/tools/jack-admin kill-server
+~/aosgp/prebuilts/sdk/tools/jack-admin uninstall-server
 cd ~/aosgp/
 make clobber
-cd ~/aosgp/
-source build/envsetup.sh && time brunch lux
+source build/envsetup.sh && breakfast lux && time make -j32 bacon
 cd /var/lib/jenkins/aosgp/out/target/product/lux/
-mv lineage-aosgp-X-2.1.1-$(date +%Y%m%d)-lux.zip aosgp-X-2.1.1-$(date +%Y%m%d)-lux.zip
-mv aosgp-X-2.1.1-$(date +%Y%m%d)-lux.zip /var/www/html/downloads/AOSGP/Motorola/MotoXPlay-lux/aosgp-X-2.1.1-$(date +%Y%m%d)-lux.zip
+rename 's/lineage-aosgp/aosgp/' lineage-aosgp-X-2.1.1*.zip
+mv aosgp-X-2.1.1-*.zip /var/www/html/downloads/AOSGP/Motorola/MotoXPlay-lux/

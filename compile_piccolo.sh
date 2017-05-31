@@ -1,8 +1,11 @@
 #!/bin/bash
+export USE_CCACHE=1
+~/aosgp/prebuilts/sdk/tools/jack-admin stop-server
+~/aosgp/prebuilts/sdk/tools/jack-admin kill-server
+~/aosgp/prebuilts/sdk/tools/jack-admin uninstall-server
 cd ~/aosgp/
 make clobber
-cd ~/aosgp/
-source build/envsetup.sh && time brunch piccolo
+source build/envsetup.sh && breakfast piccolo && time make -j32 bacon
 cd /var/lib/jenkins/aosgp/out/target/product/piccolo/
-mv lineage-aosgp-X-2.1.1-$(date +%Y%m%d)-piccolo.zip aosgp-X-2.1.1-$(date +%Y%m%d)-piccolo.zip
-mv aosgp-X-2.1.1-$(date +%Y%m%d)-piccolo.zip /var/www/html/downloads/AOSGP/Bq/BqAquarisM5-piccolo/aosgp-X-2.1.1-$(date +%Y%m%d)-piccolo.zip
+rename 's/lineage-aosgp/aosgp/' lineage-aosgp-X-2.1.1*.zip
+mv aosgp-X-2.1.1-*.zip /var/www/html/downloads/AOSGP/Bq/BqAquarisM5-piccolo/
